@@ -298,16 +298,22 @@ export default class PaymentRequest {
   _getPlatformDetailsIOS(details: PaymentDetailsIOSRaw): PaymentDetailsIOS {
     const {
       paymentData: serializedPaymentData,
+      billingContact: serializedBillingContact,
+      shippingContact: serializedShippingContact,
       paymentToken,
       transactionIdentifier,
+      paymentMethod
     } = details;
 
     const isSimulator = transactionIdentifier === 'Simulated Identifier';
 
     return {
       paymentData: isSimulator ? null : JSON.parse(serializedPaymentData),
+      billingContact,
+      shippingContact,
       paymentToken,
       transactionIdentifier,
+      paymentMethod
     };
   }
 
@@ -341,6 +347,7 @@ export default class PaymentRequest {
     shippingAddress: Object,
     payerEmail: string,
     paymentToken?: string,
+    paymentMethod: Object
   }) {
     // On Android, we don't have `onShippingAddressChange` events, so we
     // set the shipping address when the user accepts.
@@ -476,5 +483,7 @@ export default class PaymentRequest {
       getPlatformMethodData(JSON.parse(this._serializedMethodData), Platform.OS)
     );
   }
+
+  static canMakePaymentsUsingNetworks = NativePayments.canMakePaymentsUsingNetworks;
 }
 
