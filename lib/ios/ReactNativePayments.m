@@ -410,11 +410,7 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
 
  - (NSString *_Nonnull)convertPaymentMethodType:(PKPaymentMethodType)paymentMethodType
 {
-    NSArray *arr = @[@"PKPaymentMethodTypeUnknown",
-                     @"PKPaymentMethodTypeDebit",
-                     @"PKPaymentMethodTypeCredit",
-                     @"PKPaymentMethodTypePrepaid",
-                     @"PKPaymentMethodTypeStore"];
+    NSArray *arr = @[@"unknown", @"debit", @"credit", @"prepaid", @"store"];
     return (NSString *)[arr objectAtIndex:paymentMethodType];
 }
 
