@@ -15,7 +15,6 @@ Accept Payments with Apple Pay and Android Pay using the [Payment Request API](h
 - **Effective**. Faster checkouts that increase conversion.
 - **Future-proof**. Use a W3C Standards API, supported by companies like Google, Firefox and others.
 - **Cross-platform**. Share payments code between your iOS, Android, and web apps.
-- **Add-ons**. Easily enable support for Stripe or Braintree via add-ons or Cocoapods.
 
 <div>
 <img width="280px" src="https://user-images.githubusercontent.com/1627824/27758096-9fc6bf9a-5dc1-11e7-9d8f-b2d409302fc7.gif" />
@@ -31,7 +30,6 @@ Accept Payments with Apple Pay and Android Pay using the [Payment Request API](h
 - [Usage](#usage)
 - [Testing Payments](#testing-payments)
 - [Apple Pay button](#apple-pay-button)
-- [Add-ons](#add-ons)
 - [API](#api)
 - [Resources](#resources)
 - [License](#license)
@@ -41,7 +39,7 @@ Accept Payments with Apple Pay and Android Pay using the [Payment Request API](h
 You can run the demo by cloning the project and running:
 
 ```shell
-$ yarn run:demo
+yarn run:demo
 ```
 
 In a rush? Check out the [browser version](https://rnp.nof.me) of the demo.
@@ -53,13 +51,13 @@ _Note that you'll need to run it from a browser with [Payment Request support](h
 First, download the package:
 
 ```shell
-$ yarn add react-native-payments
+yarn add react-native-payments
 ```
 
 Second, link the native dependencies:
 
 ```shell
-$ react-native link react-native-payments
+react-native link react-native-payments
 ```
 
 ## Usage
@@ -177,7 +175,7 @@ Once you've defined your `methodData` and `details`, you're ready to initialize 
 const paymentRequest = new PaymentRequest(METHOD_DATA, DETAILS);
 ```
 
-🚨 _Note: On Android, display items are not displayed within the Android Pay view. Instead, the _[User Flows documentation](https://developers.google.com/android-pay/payment-flows)_ suggests showing users a confirmation view where you list the display items. When using React Native Payments, show this view after receiving the `PaymentResponse`._
+🚨 _Note: On Android, display items are not displayed within the Android Pay view. Instead, the_[User Flows documentation](https://developers.google.com/android-pay/payment-flows)_suggests showing users a confirmation view where you list the display items. When using React Native Payments, show this view after receiving the `PaymentResponse`._
 
 ### Displaying the Payment Request
 
@@ -458,8 +456,6 @@ paymentRequest.show()
 </details>
 <br/>
 
-For a list of supported payment processors and how to enable them, see the [Add-ons](#add-ons) section.
-
 ### Dismissing the Payment Request
 
 Dismissing the Payment Request is as simple as calling the `complete` method on of the `PaymentResponse`.
@@ -484,28 +480,6 @@ The sandbox environment is a great way to test offline implementation of Apple P
 
 Provides a button that is used either to trigger payments through Apple Pay or to prompt the user to set up a card.
 [Detailed docs and examples](packages/react-native-payments/docs/ApplePayButton.md)
-
-## Add-ons
-
-Here's a list of Payment Processors that you can enable via add-ons:
-
-- [Stripe](https://github.com/naoufal/react-native-payments/blob/master/packages/react-native-payments-addon-stripe)
-- Braintree:
-
-In your `Podfile`, add the following:
-
-```
-pod 'Braintree', '4.11.0'
-pod 'BraintreeDropIn'
-pod 'Braintree/PayPal'
-pod 'Braintree/Apple-Pay', '4.11.0'
-pod 'Braintree/3D-Secure'
-pod 'Braintree/DataCollector'
-```
-
-Note: All of the above Braintree dependencies may not all be needed; however, I haven't had a chance to test. This integration implementation (vs Carthage) aligns the installation process with RN >= 60 and its official adoption of Cocoapods.
-
-🚨 _Note: On Android, Payment Processors are enabled by default._
 
 ## API
 
